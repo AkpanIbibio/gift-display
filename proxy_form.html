@@ -24,14 +24,24 @@
         .form-container h1 {
             font-size: 1.65rem;
             font-weight: bold;
-            color: #d32f2f;
+            color: #1a1a1a;
             text-align: center;
         }
         .form-container h2 {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #f57c00;
             text-align: center;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ff6f61, #d32f2f, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         .form-container p {
             font-size: 1rem;
@@ -88,7 +98,7 @@
 <body>
     <div class="form-container">
         <h1>Pinnacle Oil and Gas Limited</h1>
-        <h2>Lube Up! Gift Up!!</h2>
+        <h2>Lube Up! Gift Up!! 🛢️🛢️</h2>
         <p>🎉 Welcome to Pinnacle! 💖</p>
         <p>Congratulations on choosing Pinnacle, your premium personal lube brand! 🙌✨🎁 Fill this form to get an instant gift – it only takes a minute! 📝😄</p>
         <form id="giftForm" class="mt-6" onsubmit="event.preventDefault(); validateForm();">
