@@ -1,177 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinnacle Oil and Gas - Lube Up! Gift Up!!</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-image: url('https://images.unsplash.com/photo-1505455184861-7709f4e0a251?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            font-family: 'Arial', sans-serif;
-        }
-        .form-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-        .form-container h1 {
-            font-size: 1.65rem;
-            font-weight: bold;
-            color: #1a1a1a;
-            text-align: center;
-        }
-        .form-container h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #ff6f61, #d32f2f, #ff6b6b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        .form-container p {
-            font-size: 1rem;
-            font-style: italic;
-            color: #333;
-            text-align: center;
-        }
-        .form-container label {
-            font-weight: 600;
-            color: #333;
-        }
-        .form-container input, .form-container select {
-            width: 100%;
-            padding: 0.75rem;
-            margin-top: 0.5rem;
-            border: 2px solid #ff6f61;
-            border-radius: 0.5rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        .form-container input:focus, .form-container select:focus {
-            border-color: #d32f2f;
-        }
-        .form-container button {
-            background: #d32f2f;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .form-container button:hover {
-            background: #b71c1c;
-        }
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-        }
-        .error {
-            color: #d32f2f;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pinnacle Oil and Gas - Lube Up! Gift Up!!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Confetti JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      background-image: url('https://images.unsplash.com/photo-1505455184861-7709f4e0a251?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #giftModal {
+      backdrop-filter: blur(5px);
+    }
+  </style>
 </head>
-<body>
-    <div class="form-container">
-        <h1>Pinnacle Oil and Gas Limited</h1>
-        <h2>Lube Up! Gift Up!! 🛢️🛢️</h2>
-        <p>🎉 Welcome to Pinnacle! 💖</p>
-        <p>Congratulations on choosing Pinnacle, your premium personal lube brand! 🙌✨🎁 Fill this form to get an instant gift – it only takes a minute! 📝😄</p>
-        <form id="giftForm" class="mt-6" onsubmit="event.preventDefault(); validateForm();">
-            <div class="mb-4">
-                <label for="fullName" class="block">Full Name *</label>
-                <input type="text" id="fullName" name="fullName" required class="mt-1">
-                <div id="fullNameError" class="error"></div>
-            </div>
-            <div class="mb-4">
-                <label for="email" class="block">Email</label>
-                <input type="email" id="email" name="email" class="mt-1">
-                <div id="emailError" class="error"></div>
-            </div>
-            <div class="mb-4">
-                <label for="phone" class="block">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required class="mt-1" maxlength="11">
-                <div id="phoneError" class="error"></div>
-            </div>
-            <div class="mb-4">
-                <label class="block">Volume(s) Purchased *</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="quantity" value="1L"> 1L</label>
-                    <label><input type="checkbox" name="quantity" value="4L"> 4L</label>
-                    <label><input type="checkbox" name="quantity" value="25L"> 25L</label>
-                </div>
-                <div id="quantityError" class="error"></div>
-            </div>
-            <div class="mb-4 text-center">
-                <a href="https://www.pinnacleoilandgas.com" target="_blank" class="text-blue-600 underline">Visit our website</a>
-            </div>
-            <div class="text-center">
-                <button type="submit">Submit</button>
-            </div>
-        </form>
+<body class="flex items-center justify-center min-h-screen px-4">
+
+  <div id="formContainer" class="w-full max-w-xl p-6 bg-white bg-opacity-95 rounded-2xl shadow-2xl backdrop-blur-md relative z-10">
+    <h1 class="text-2xl font-bold text-center text-gray-800">Pinnacle Oil and Gas Limited</h1>
+    <h2 class="text-xl text-center font-extrabold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent animate-pulse mt-2">Lube Up! Gift Up!! 🛢️🎁</h2>
+    
+    <div class="text-center text-gray-600 italic mt-3">🎉 Welcome to Pinnacle! 💖</div>
+    <p class="text-center text-gray-800 mt-1 mb-4">
+      Congratulations on choosing Pinnacle, your premium personal lube brand! 🙌✨🎁 Fill this form to get an instant gift – it only takes a minute! 📝😄
+    </p>
+
+    <form id="giftForm" class="space-y-4" onsubmit="event.preventDefault(); validateForm();">
+      <div>
+        <label for="fullName" class="block text-sm font-medium text-gray-800">Full Name *</label>
+        <input type="text" id="fullName" name="fullName" required class="mt-1 w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-red-500 outline-none" placeholder="Enter your full name" />
+        <div id="fullNameError" class="text-red-600 text-xs mt-1"></div>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-800">Email (optional)</label>
+        <input type="email" id="email" name="email" class="mt-1 w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-red-500 outline-none" placeholder="example@email.com" />
+        <div id="emailError" class="text-red-600 text-xs mt-1"></div>
+      </div>
+
+      <div>
+        <label for="phone" class="block text-sm font-medium text-gray-800">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" required maxlength="11" class="mt-1 w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-red-500 outline-none" placeholder="08012345678" />
+        <div id="phoneError" class="text-red-600 text-xs mt-1"></div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-800 mb-1">Volume(s) Purchased *</label>
+        <div class="flex flex-wrap gap-3">
+          <label class="inline-flex items-center gap-2"><input type="checkbox" name="quantity" value="1L" class="accent-red-500" />1L</label>
+          <label class="inline-flex items-center gap-2"><input type="checkbox" name="quantity" value="4L" class="accent-red-500" />4L</label>
+          <label class="inline-flex items-center gap-2"><input type="checkbox" name="quantity" value="25L" class="accent-red-500" />25L</label>
+        </div>
+        <div id="quantityError" class="text-red-600 text-xs mt-1"></div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" id="submitBtn" class="w-full px-4 py-2 font-semibold rounded-lg bg-gradient-to-r from-red-600 to-yellow-500 text-white shadow-lg hover:scale-105 transition duration-300">Get My Gift 🎁</button>
+      </div>
+
+      <div class="text-center text-sm mt-2">
+        <a href="https://pinnacleoilandgas.com" class="text-blue-600 underline" target="_blank">Visit Our Website</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Centered Modal -->
+  <div id="giftModal" class="fixed inset-0 hidden items-center justify-center z-50 bg-black bg-opacity-70">
+    <div class="bg-white rounded-2xl p-6 text-center shadow-2xl w-80">
+      <h3 class="text-xl font-bold text-gray-800">🎉 Congratulations! You have won: 🎉</h3>
+      <p id="giftMessage" class="text-green-700 text-lg font-semibold mt-2"></p>
+      <p class="text-xs italic text-red-500 mt-2">Collect at the station of purchase. Don’t close until you collect! 🚗💨</p>
+      <button onclick="closeModal()" class="mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 to-yellow-500 text-white shadow hover:scale-105 transition">Close</button>
     </div>
-    <script>
-        function validateForm() {
-            let isValid = true;
-            const fullName = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const quantities = document.querySelectorAll('input[name="quantity"]:checked');
+  </div>
 
-            document.getElementById('fullNameError').textContent = '';
-            document.getElementById('emailError').textContent = '';
-            document.getElementById('phoneError').textContent = '';
-            document.getElementById('quantityError').textContent = '';
+  <!-- JS Logic -->
+  <script>
+    const giftMappings = {
+      '1L': ['FACE CAP', 'DISPOSABLE RAINCOAT'],
+      '4L': ['NOTEBOOK', 'PEN', 'POP SOCKET', 'MUG', 'NAPKIN BOX', 'MINI UMBRELLA'],
+      '25L': ['LARGE UMBRELLA']
+    };
+    let giftIndices = JSON.parse(localStorage.getItem('giftIndices') || '{}');
+    for (let volume in giftMappings) {
+      if (!giftIndices[volume]) giftIndices[volume] = 0;
+    }
 
-            if (!fullName) {
-                document.getElementById('fullNameError').textContent = 'Full Name is required';
-                isValid = false;
-            }
-
-            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                document.getElementById('emailError').textContent = 'Invalid email format';
-                isValid = false;
-            }
-
-            if (!phone || !/^\d{11}$/.test(phone)) {
-                document.getElementById('phoneError').textContent = 'Phone Number must be exactly 11 digits';
-                isValid = false;
-            }
-
-            if (quantities.length === 0) {
-                document.getElementById('quantityError').textContent = 'At least one volume must be selected';
-                isValid = false;
-            }
-
-            if (isValid) {
-                alert('Form submitted successfully!');
-                document.getElementById('giftForm').reset();
-            }
+    function allocateGifts(quantities) {
+      let allocated = [];
+      quantities.forEach(qty => {
+        const gifts = giftMappings[qty];
+        if (gifts) {
+          const idx = giftIndices[qty] % gifts.length;
+          allocated.push(gifts[idx]);
+          giftIndices[qty] = (idx + 1) % gifts.length;
         }
-    </script>
+      });
+      localStorage.setItem('giftIndices', JSON.stringify(giftIndices));
+      return allocated.length ? allocated : ['No Gift Allocated'];
+    }
+
+    function formatGifts(gifts) {
+      if (gifts.length === 1) return gifts[0];
+      if (gifts.length === 2) return `${gifts[0]} and ${gifts[1]}`;
+      return `${gifts.slice(0, -1).join(', ')} and ${gifts.slice(-1)}`;
+    }
+
+    function validateForm() {
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const quantities = Array.from(document.querySelectorAll('input[name="quantity"]:checked')).map(el => el.value);
+
+      document.getElementById('fullNameError').textContent = '';
+      document.getElementById('emailError').textContent = '';
+      document.getElementById('phoneError').textContent = '';
+      document.getElementById('quantityError').textContent = '';
+
+      let valid = true;
+      if (!fullName) {
+        document.getElementById('fullNameError').textContent = 'Full Name is required';
+        valid = false;
+      }
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('emailError').textContent = 'Invalid email';
+        valid = false;
+      }
+      if (!phone || !/^\d{11}$/.test(phone)) {
+        document.getElementById('phoneError').textContent = 'Phone must be 11 digits';
+        valid = false;
+      }
+      if (quantities.length === 0) {
+        document.getElementById('quantityError').textContent = 'Select at least one volume';
+        valid = false;
+      }
+
+      if (valid) {
+        const gifts = allocateGifts(quantities);
+        document.getElementById('giftMessage').innerHTML = formatGifts(gifts);
+        document.getElementById('giftModal').classList.remove('hidden');
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+
+        const submission = {
+          fullName,
+          email,
+          phone,
+          quantities,
+          gifts,
+          timestamp: new Date().toISOString()
+        };
+        let submissions = JSON.parse(localStorage.getItem('giftSubmissions') || '[]');
+        submissions.push(submission);
+        localStorage.setItem('giftSubmissions', JSON.stringify(submissions));
+
+        document.getElementById('giftForm').reset();
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('giftModal').classList.add('hidden');
+    }
+  </script>
+
 </body>
 </html>
