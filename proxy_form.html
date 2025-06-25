@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pinnacle Oil and Gas - Lube Up! Gift Up!!</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Confetti JS CDN -->
+  <!-- Confetti JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <style>
     body {
@@ -15,14 +15,11 @@
       background-attachment: fixed;
       font-family: 'Segoe UI', sans-serif;
     }
-
-    #giftModal {
-      backdrop-filter: blur(5px);
-    }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen px-4">
+<body class="min-h-screen flex items-center justify-center px-4 py-10">
 
+  <!-- Form Container -->
   <div id="formContainer" class="w-full max-w-xl p-6 bg-white bg-opacity-95 rounded-2xl shadow-2xl backdrop-blur-md relative z-10">
     <h1 class="text-2xl font-bold text-center text-gray-800">Pinnacle Oil and Gas Limited</h1>
     <h2 class="text-xl text-center font-extrabold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent animate-pulse mt-2">Lube Up! Gift Up!! 🛢️🎁</h2>
@@ -66,28 +63,30 @@
       </div>
 
       <div class="text-center text-sm mt-2">
-        <a href="https://pinnacleoilandgas.com" class="text-blue-600 underline" target="_blank">Visit Our Website</a>
+        <a href="https://www.pinnacleoilandgas.com" class="text-blue-600 underline" target="_blank">Visit Our Website</a>
       </div>
     </form>
   </div>
 
-  <!-- Centered Modal -->
-  <div id="giftModal" class="fixed inset-0 hidden items-center justify-center z-50 bg-black bg-opacity-70">
-    <div class="bg-white rounded-2xl p-6 text-center shadow-2xl w-80">
+  <!-- Modal -->
+  <div id="giftModal" class="fixed inset-0 hidden z-50 bg-black bg-opacity-70 flex items-center justify-center">
+    <div class="bg-white rounded-2xl p-6 text-center shadow-2xl w-80 max-w-[90vw]">
       <h3 class="text-xl font-bold text-gray-800">🎉 Congratulations! You have won: 🎉</h3>
       <p id="giftMessage" class="text-green-700 text-lg font-semibold mt-2"></p>
-      <p class="text-xs italic text-red-500 mt-2">Collect your gift now, at the station of purchase. You may also receive an email with details about your gift. Share the joy! 😊🎉🚗💨</p>
+      <p class="text-xs italic text-red-500 mt-2">
+        Collect your gift now, at the station of purchase. You may also receive an email with details about your gift. Share the joy! 🤩 🎉🚗🛢️🎁
+      </p>
       <button onclick="closeModal()" class="mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 to-yellow-500 text-white shadow hover:scale-105 transition">Close</button>
     </div>
   </div>
 
-  <!-- JS Logic -->
   <script>
     const giftMappings = {
       '1L': ['FACE CAP', 'DISPOSABLE RAINCOAT'],
       '4L': ['NOTEBOOK', 'PEN', 'POP SOCKET', 'MUG', 'NAPKIN BOX', 'MINI UMBRELLA'],
       '25L': ['LARGE UMBRELLA']
     };
+
     let giftIndices = JSON.parse(localStorage.getItem('giftIndices') || '{}');
     for (let volume in giftMappings) {
       if (!giftIndices[volume]) giftIndices[volume] = 0;
@@ -108,9 +107,9 @@
     }
 
     function formatGifts(gifts) {
-      if (gifts.length === 1) return gifts[0];
-      if (gifts.length === 2) return `${gifts[0]} and ${gifts[1]}`;
-      return `${gifts.slice(0, -1).join(', ')} and ${gifts.slice(-1)}`;
+      if (gifts.length === 1) return `<span class="text-green-700 font-bold">${gifts[0]}</span>`;
+      if (gifts.length === 2) return `<span class="text-green-700 font-bold">${gifts[0]}</span> and <span class="text-green-700 font-bold">${gifts[1]}</span>`;
+      return gifts.slice(0, -1).map(g => `<span class="text-green-700 font-bold">${g}</span>`).join(', ') + ` and <span class="text-green-700 font-bold">${gifts[gifts.length - 1]}</span>`;
     }
 
     function validateForm() {
@@ -146,10 +145,11 @@
         const gifts = allocateGifts(quantities);
         document.getElementById('giftMessage').innerHTML = formatGifts(gifts);
         document.getElementById('giftModal').classList.remove('hidden');
+
         confetti({
           particleCount: 150,
-          spread: 80,
-          origin: { y: 0.6 }
+          spread: 100,
+          origin: { x: 0.5, y: 0.5 }
         });
 
         const submission = {
